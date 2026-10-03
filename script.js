@@ -4,9 +4,31 @@
 // Note that when running locally, in order to open a web page which uses modules, you must serve the directory over HTTP e.g. with https://www.npmjs.com/package/http-server
 // You can't open the index.html file using a file:// URL.
 
-import { getUserIds } from "./storage.js";
+import { getUserIds, getData } from "./storage.js";
 
 window.onload = function () {
   const users = getUserIds();
-  document.querySelector("body").innerText = `There are ${users.length} users`;
+  const dropdown = document.querySelector("#user-select");
+  const container = document.querySelector("#bookmarks-container");
+
+  users.forEach(function (userId) {
+    const option = document.createElement("option");
+    option.value = userId;
+    option.textContent = `User ${userId}`;
+    dropdown.appendChild(option);
+  });
+
+  function showBookmarksForUser() {
+    const selectedUserId = dropdown.value;
+    const bookmarks = getData(selectedUserId);
+
+    if (bookmarks === null) {
+      container.innerText = "No bookmarks yet";
+    } else {
+      container.innerText = "You have bookmarks! (we'll show them next)";
+    }
+  }
+
+  dropdown.addEventListener("change", showBookmarksForUser);
+  showBookmarksForUser();
 };
