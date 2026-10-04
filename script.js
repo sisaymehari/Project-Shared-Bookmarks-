@@ -26,7 +26,25 @@ window.onload = function () {
     if (bookmarks === null) {
       container.innerText = "No bookmarks yet";
     } else {
-      container.innerText = "You have bookmarks! (we'll show them next)";
+      container.innerText = "";
+
+      bookmarks.forEach(function (bookmark) {
+        const bookmarkElement = document.createElement("div");
+
+        const date = new Date(bookmark.createdAt);
+
+        bookmarkElement.innerText = `${bookmark.title}\n${bookmark.description}\nCreated: ${date.toLocaleString()}`;
+
+        const copyButton = document.createElement("button");
+        copyButton.innerText = "Copy to clipboard";
+
+        copyButton.addEventListener("click", function () {
+          navigator.clipboard.writeText(bookmark.url);
+        });
+
+        bookmarkElement.appendChild(copyButton);
+        container.appendChild(bookmarkElement);
+      });
     }
   }
 
@@ -55,5 +73,6 @@ window.onload = function () {
     updatedBookmarks.push(bookmark);
 
     setData(selectedUserId, updatedBookmarks);
+    showBookmarksForUser();
   });
 };
