@@ -1,10 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <script type="module" src="script.js"></script>
   </head>
   <body>
     <select id="user-select"></select>
+
+    <form id="bookmark-form">
+      <label for="bookmark-url">URL</label>
+      <input id="bookmark-url" type="url" required />
+
+      <label for="bookmark-title">Title</label>
+      <input id="bookmark-title" type="text" required />
+
+      <label for="bookmark-description">Description</label>
+      <textarea id="bookmark-description" required></textarea>
+
+      <button type="submit">Add bookmark</button>
+    </form>
+
     <div id="bookmarks-container"></div>
   </body>
 </html>
