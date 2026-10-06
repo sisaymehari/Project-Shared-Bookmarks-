@@ -1,9 +1,3 @@
-// This is a placeholder file which shows how you can access functions defined in other files.
-// It can be loaded into index.html.
-// You can delete the contents of the file once you have understood how it works.
-// Note that when running locally, in order to open a web page which uses modules, you must serve the directory over HTTP e.g. with https://www.npmjs.com/package/http-server
-// You can't open the index.html file using a file:// URL.
-
 import { getUserIds, getData, setData } from "./storage.js";
 
 window.onload = function () {
@@ -28,12 +22,19 @@ window.onload = function () {
     } else {
       container.innerText = "";
 
-      bookmarks.forEach(function (bookmark) {
+      [...bookmarks].reverse().forEach(function (bookmark) {
         const bookmarkElement = document.createElement("div");
 
-        const date = new Date(bookmark.createdAt);
+        const titleLink = document.createElement("a");
+        titleLink.href = bookmark.url;
+        titleLink.textContent = bookmark.title;
 
-        bookmarkElement.innerText = `${bookmark.title}\n${bookmark.description}\nCreated: ${date.toLocaleString()}`;
+        const descriptionElement = document.createElement("p");
+        descriptionElement.textContent = bookmark.description;
+
+        const date = new Date(bookmark.createdAt);
+        const createdAtElement = document.createElement("p");
+        createdAtElement.textContent = `Created: ${date.toLocaleString()}`;
 
         const copyButton = document.createElement("button");
         copyButton.innerText = "Copy to clipboard";
@@ -42,7 +43,22 @@ window.onload = function () {
           navigator.clipboard.writeText(bookmark.url);
         });
 
-        bookmarkElement.appendChild(copyButton);
+        const likeButton = document.createElement("button");
+        likeButton.textContent = `Like (${bookmark.likes})`;
+
+        likeButton.addEventListener("click", function () {
+          bookmark.likes += 1;
+          setData(selectedUserId, bookmarks);
+          showBookmarksForUser();
+        });
+
+        bookmarkElement.append(
+          titleLink,
+          descriptionElement,
+          createdAtElement,
+          copyButton,
+          likeButton
+        );
         container.appendChild(bookmarkElement);
       });
     }
@@ -57,13 +73,13 @@ window.onload = function () {
     const url = document.querySelector("#bookmark-url").value;
     const title = document.querySelector("#bookmark-title").value;
     const description = document.querySelector("#bookmark-description").value;
-    // create and save bookmark here
 
     const bookmark = {
       url: url,
       title: title,
       description: description,
       createdAt: new Date(),
+      likes: 0,
     };
 
     const selectedUserId = dropdown.value;
@@ -74,5 +90,6 @@ window.onload = function () {
 
     setData(selectedUserId, updatedBookmarks);
     showBookmarksForUser();
+    form.reset();
   });
 };
