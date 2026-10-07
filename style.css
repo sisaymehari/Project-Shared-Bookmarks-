@@ -1,0 +1,78 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: white;
+  color: #1e293b;
+  margin: 0;
+  padding: 30px;
+}
+
+main {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+h1 {
+  color: #1565c0;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+select,
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #90caf9;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+textarea {
+  min-height: 100px;
+}
+
+button {
+  background-color: #1565c0;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+button:hover {
+  background-color: #0d47a1;
+}
+
+#bookmarks-container {
+  margin-top: 30px;
+}
+
+#bookmarks-container > div {
+  border: 1px solid #90caf9;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: white;
+}
+
+#bookmarks-container a {
+  color: #1565c0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#bookmarks-container a:hover {
+  color: #0d47a1;
+}
+
+#bookmarks-container button:hover {
+  background-color: #0d47a1;
+}

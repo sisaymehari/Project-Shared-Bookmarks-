@@ -1,4 +1,5 @@
 import { getUserIds, getData, setData } from "./storage.js";
+import { sortBookmarks } from "./bookmarkUtils.js";
 
 window.onload = function () {
   const users = getUserIds();
@@ -22,7 +23,7 @@ window.onload = function () {
     } else {
       container.innerText = "";
 
-      [...bookmarks].reverse().forEach(function (bookmark) {
+      sortBookmarks(bookmarks).forEach(function (bookmark) {
         const bookmarkElement = document.createElement("div");
 
         const titleLink = document.createElement("a");
@@ -57,7 +58,7 @@ window.onload = function () {
           descriptionElement,
           createdAtElement,
           copyButton,
-          likeButton
+          likeButton,
         );
         container.appendChild(bookmarkElement);
       });
