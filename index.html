@@ -10,23 +10,34 @@
   <body>
     <main>
       <h1>Shared Bookmarks</h1>
-      <label for="user-select">Choose a user</label>
-      <select id="user-select"></select>
 
-      <form id="bookmark-form">
-        <label for="bookmark-url">URL</label>
-        <input id="bookmark-url" type="url" required />
+      <div class="layout">
+        <section class="card">
+          <label for="user-select">Choose a user</label>
+          <select id="user-select" required>
+            <option value="">Select the User</option>
+          </select>
 
-        <label for="bookmark-title">Title</label>
-        <input id="bookmark-title" type="text" required />
+          <h2>User Bookmarks</h2>
+          <div id="bookmarks-container"></div>
+        </section>
 
-        <label for="bookmark-description">Description</label>
-        <textarea id="bookmark-description" required></textarea>
+        <section class="card">
+          <h2>Add New Bookmark</h2>
+          <form id="bookmark-form">
+            <label for="bookmark-url">URL</label>
+            <input id="bookmark-url" type="url" required />
 
-        <button type="submit">Add bookmark</button>
-      </form>
+            <label for="bookmark-title">Title</label>
+            <input id="bookmark-title" type="text" required />
 
-      <div id="bookmarks-container"></div>
+            <label for="bookmark-description">Description</label>
+            <textarea id="bookmark-description" required></textarea>
+
+            <button type="submit">Add bookmark</button>
+          </form>
+        </section>
+      </div>
     </main>
   </body>
 </html>
