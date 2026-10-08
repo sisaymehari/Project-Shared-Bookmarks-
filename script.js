@@ -16,6 +16,12 @@ window.onload = function () {
 
   function showBookmarksForUser() {
     const selectedUserId = dropdown.value;
+
+    if (selectedUserId === "") {
+      container.innerText = "Select a user to see their bookmarks";
+      return;
+    }
+
     const bookmarks = getData(selectedUserId);
 
     if (bookmarks === null) {
@@ -70,6 +76,10 @@ window.onload = function () {
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
+
+    if (!dropdown.reportValidity()) {
+      return;
+    }
 
     const url = document.querySelector("#bookmark-url").value;
     const title = document.querySelector("#bookmark-title").value;
